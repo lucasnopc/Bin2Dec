@@ -4,7 +4,7 @@ Nextjs / Tailwindcss / Typescript
 
 ### Preview
 
- [`Online Preview`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
+ [`Online Preview`](https://bin2dec-virid.vercel.app/)
 
 ```bash
 yarn dev
