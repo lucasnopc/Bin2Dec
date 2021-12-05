@@ -1,29 +1,23 @@
 import { useState } from "react";
-import Message from "./message";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Bin2dec() {
-  const [stateMessage, setStateMessage] = useState({state: false, msg: ''})
   const [numConverter, setNumConverter] = useState(0)
-  const popMessage = (msg: string) => {
-    setTimeout(() => {
-      setStateMessage({state: false, msg: msg})
-    }, 2000)
-    setStateMessage({state: true, msg: msg})
-  }
 
   const changeInputNumber = e => {
-    if (e.target.value && e.target.value.length < 9 ) {
+    if (e.target.value && e.target.value.length < 9) {
       const n = Number(e.target.value.slice(-1))
       if (n == 1 || n == 0) {
         const digit = parseInt(e.target.value, 2);
         setNumConverter(digit)
       } else {
-        popMessage('the number you entered is different from 0 and 1')
+        toast.error('the number you entered is different from 0 and 1')
         const newval = e.target.value.substring(0, e.target.value.length - 1)
         e.target.value = newval
       }
-    }else {
-      popMessage('the field only accepts a maximum of 8 characters')
+    } else {
+      toast.warning('the field only accepts a maximum of 8 characters')
       const newval = e.target.value.substring(0, e.target.value.length - 1)
       e.target.value = newval
     }
@@ -37,7 +31,16 @@ export default function Bin2dec() {
         <input onChange={e => { changeInputNumber(e) }} type="number" className="w-full block p-2 outline-none text-red-500 font-bold" />
       </div>
       <span className="text-2xl md:text-4xl w-full text-center block p-3 ">{numConverter}</span>
-      <Message stateMessage={stateMessage} />
     </div>
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover />
   </div>
 }
